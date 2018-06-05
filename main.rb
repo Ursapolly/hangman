@@ -12,7 +12,7 @@ end
 require 'unicode_utils/upcase'
 
 require_relative 'lib/game'
-require_relative 'lib/resultprinter'
+require_relative 'lib/result_printer'
 require_relative 'lib/word_reader'
 
 VERSION = 'Игра виселица, версия 4'
