@@ -62,6 +62,6 @@ class ResultPrinter
   end
 
   def cls
-    system('clear') or system ('cls')
+    system('clear') || system('cls')
   end
 end

@@ -15,7 +15,7 @@ require_relative 'lib/game'
 require_relative 'lib/result_printer'
 require_relative 'lib/word_reader'
 
-VERSION = 'Игра виселица, версия 4'
+VERSION = 'Игра виселица v.4'
 sleep 1
 
 word_reader = WordReader.new

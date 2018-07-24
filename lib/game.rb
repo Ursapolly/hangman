@@ -7,22 +7,22 @@ class Game
 
   MAX_ERRORS = 7
 
-  def initialize(slovo)
-    @letters = get_letters(slovo)
+  def initialize(word)
+    @letters = get_letters(word)
     @errors = 0
     @good_letters = []
     @bad_letters = []
-    @status = :in_progress #:won, :lost
+    @status = :in_progress # or – :won, :lost
   end
 
-  def get_letters(slovo)
-    if slovo.nil? || slovo == ''
-      abort 'Упс! Вы не ввели слово для игры...'
+  def get_letters(word)
+    if word.nil? || word == ''
+      abort 'Вы не ввели слово для игры...'
     else
-      slovo = slovo.encode('UTF-8')
+      word = word.encode('UTF-8')
     end
 
-    UnicodeUtils.upcase(slovo).split('')
+    UnicodeUtils.upcase(word).split('')
   end
 
   def max_errors
@@ -35,16 +35,18 @@ class Game
 
   def good?(letter)
     @letters.include?(letter) ||
-      (letter == 'Е' && @letters.include?('Ё')) ||
-      (letter == 'Ё' && @letters.include?('Е'))
+        (letter == 'Е' && @letters.include?('Ё')) ||
+        (letter == 'Ё' && @letters.include?('Е'))
   end
 
   def add_letter_to(letters, letter)
     letters << letter
 
     case letter
-    when 'Е' then letters << 'Ё'
-    when 'Ё' then letters << 'Е'
+    when 'Е' then
+      letters << 'Ё'
+    when 'Ё' then
+      letters << 'Е'
     end
   end
 
@@ -70,9 +72,7 @@ class Game
 
   def next_step(letter)
     letter = UnicodeUtils.upcase(letter)
-
     return if @status == :lost || @status == :won
-
     return if repeated?(letter)
 
     if good?(letter)
@@ -88,9 +88,7 @@ class Game
   def ask_next_letter
     puts "\nВведите следующую букву"
     letter = ''
-
     letter = STDIN.gets.encode("UTF-8").chomp while letter == ''
-
     next_step(letter)
   end
 end
